@@ -10,6 +10,7 @@ export class DuplicateSlugError extends Error {}
 const defaultSupabaseUrl = "https://obtqazmecrxcrqrpjgsi.supabase.co";
 
 function supabase() {
+  if (env.SUPABASE_ENABLED !== "true") return null;
   const key = env.SUPABASE_SECRET_KEY || env.SUPABASE_SERVICE_ROLE_KEY;
   if (!key) return null;
   return createClient(env.SUPABASE_URL || defaultSupabaseUrl, key, {
