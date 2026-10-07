@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "Kisu Link — Short links & QR codes",
-  description: "Create memorable short links and downloadable QR codes in seconds.",
+  title: "Kisu Link — Personal workspace",
+  description: "Personal short link and QR code manager.",
   icons: { icon: "/favicon.svg" },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

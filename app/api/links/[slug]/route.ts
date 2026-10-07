@@ -1,9 +1,7 @@
-import { eq } from "drizzle-orm";
-import { getDb } from "../../../../db";
-import { links } from "../../../../db/schema";
+import { deleteLink } from "../../../../lib/links-store";
 
 export async function DELETE(_request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  await getDb().delete(links).where(eq(links.slug, slug));
+  await deleteLink(slug);
   return Response.json({ ok: true });
 }
