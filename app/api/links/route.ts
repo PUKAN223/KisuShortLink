@@ -1,4 +1,5 @@
 import { createLink, DuplicateSlugError, findLink, listLinks, type ShortLink } from "../../../lib/links-store";
+import { SHORT_LINK_ORIGIN } from "../../../lib/site";
 
 export async function GET() {
   try {
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
   if (!["http:", "https:"].includes(parsed.protocol)) return Response.json({ error: "Only http and https URLs are supported." }, { status: 400 });
   if (typeof alias !== "string" || (alias && !/^[A-Za-z0-9_-]{3,32}$/.test(alias))) return Response.json({ error: "Alias must be 3–32 letters, numbers, dashes or underscores." }, { status: 400 });
   if (alias && reserved.has(alias.toLowerCase())) return Response.json({ error: "That alias is reserved." }, { status: 400 });
-  if (parsed.origin === new URL(request.url).origin) return Response.json({ error: "Choose a destination outside this site." }, { status: 400 });
+  if (parsed.origin === new URL(request.url).origin || parsed.origin === SHORT_LINK_ORIGIN) return Response.json({ error: "Choose a destination outside this site." }, { status: 400 });
   const alphabet = "abcdefghjkmnpqrstuvwxyz23456789";
   for (let attempt = 0; attempt < 5; attempt++) {
     const slug = alias || Array.from(crypto.getRandomValues(new Uint8Array(6)), n => alphabet[n % alphabet.length]).join("");

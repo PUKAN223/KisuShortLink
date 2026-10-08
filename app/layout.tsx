@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 export const metadata: Metadata = {
-  title: "Kisu Link — Personal workspace",
+  title: "Kisux3 — Personal link workspace",
   description: "Personal short link and QR code manager.",
   icons: { icon: "/favicon.svg" },
 };
