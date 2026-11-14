@@ -2,7 +2,9 @@
 
 > A personal short URL manager with automatic QR codes, per-link QR customization, and Supabase storage.
 
-## <img src="https://api.iconify.design/lucide:sparkles.svg?color=%23ffffff" width="20" height="20" valign="middle"> Overview
+---
+
+## Overview
 
 Kisux3 Links creates short URLs under `https://kisux3.xyz/`. Each link appears in a recent links list with a QR code that can be styled and downloaded as a PNG.
 
@@ -10,15 +12,15 @@ The app uses Next.js for the interface and API routes. Link records live in Supa
 
 ---
 
-## <img src="https://api.iconify.design/lucide:layers-3.svg?color=%23ffffff" width="20" height="20" valign="middle"> Features
+## Features
 
-### <img src="https://api.iconify.design/lucide:link-2.svg?color=%23ffffff" width="18" height="18" valign="middle"> Short Links
+### Short Links
 
-* Shorten HTTP and HTTPS URLs
-* Use an optional custom alias of 3–32 letters, numbers, dashes, or underscores
-* Copy a new link from its confirmation toast or from the recent links list
-* Open, refresh, and delete recent links
-* See the click count for each link
+- Shorten HTTP and HTTPS URLs
+- Use an optional custom alias of 3–32 letters, numbers, dashes, or underscores
+- Copy a new link from its confirmation toast or from the recent links list
+- Open, refresh, and delete recent links
+- See the click count for each link
 
 Short URLs follow this format:
 
@@ -26,14 +28,14 @@ Short URLs follow this format:
 https://kisux3.xyz/<slug>
 ```
 
-### <img src="https://api.iconify.design/lucide:qr-code.svg?color=%23ffffff" width="18" height="18" valign="middle"> QR Codes
+### QR Codes
 
 Every recent link gets a QR preview automatically. Open **QR settings** on a link to customize it:
 
-* Classic, rounded, or dot style
-* Code and background colors
-* Optional center image from a PNG, JPG, or WebP file
-* Live preview and 640 × 640 PNG download
+- Classic, rounded, or dot style
+- Code and background colors
+- Optional center image from a PNG, JPG, or WebP file
+- Live preview and 640 × 640 PNG download
 
 QR codes use high error correction. The editor checks color contrast and limits the center image size, but you should scan a customized code before sharing it.
 
@@ -41,24 +43,27 @@ QR settings, including the processed center image, are stored in browser storage
 
 ---
 
-## <img src="https://api.iconify.design/lucide:network.svg?color=%23ffffff" width="20" height="20" valign="middle"> Architecture
+## Architecture
 
 ```text
 Browser
-  |-- Next.js interface
-  |     +-- QR preview and PNG generation
-  |     +-- Browser storage for QR settings
-  |
-  +-- Next.js API routes
-        +-- Supabase Data API
-              +-- PostgreSQL links table
+ |
+ |-- Next.js Interface
+ |     |-- QR Preview and PNG Generation
+ |     +-- Browser Storage for QR Settings
+ |
+ +-- Next.js API Routes
+       |
+       +-- Supabase Data API
+             |
+             +-- PostgreSQL Links Table
 ```
 
 The server handles link creation, listing, deletion, redirects, and click counting. The Supabase secret key stays in the server environment.
 
 ---
 
-## <img src="https://api.iconify.design/lucide:cpu.svg?color=%23ffffff" width="20" height="20" valign="middle"> Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 | ---------- | ------- |
@@ -75,7 +80,7 @@ The server handles link creation, listing, deletion, redirects, and click counti
 
 ---
 
-## <img src="https://api.iconify.design/lucide:database.svg?color=%23ffffff" width="20" height="20" valign="middle"> Database
+## Database
 
 The Supabase schema is in [`supabase/schema.sql`](supabase/schema.sql). Its `public.links` table contains:
 
@@ -90,7 +95,7 @@ The `increment_link_clicks` function increments the count when a short URL is op
 
 ---
 
-## <img src="https://api.iconify.design/lucide:folder-tree.svg?color=%23ffffff" width="20" height="20" valign="middle"> Project Structure
+## Project Structure
 
 ```text
 KisuShortLink/
@@ -115,13 +120,13 @@ KisuShortLink/
 
 ---
 
-## <img src="https://api.iconify.design/lucide:rocket.svg?color=%23ffffff" width="20" height="20" valign="middle"> Getting Started
+## Getting Started
 
 ### Requirements
 
-* Node.js 22.13 or newer
-* Bun
-* A Supabase project
+- Node.js 22.13 or newer
+- Bun
+- A Supabase project
 
 ### Clone and Install
 
@@ -144,11 +149,15 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SECRET_KEY=your_supabase_secret_key
 ```
 
-The project URL is already filled in within `.env.example`; replace it if you use another Supabase project. A legacy service role key can be supplied as `SUPABASE_SERVICE_ROLE_KEY` instead. Keep either key out of `NEXT_PUBLIC_` variables and browser code. `.env.local` is ignored by Git.
+The project URL is already filled in within `.env.example`; replace it if you use another Supabase project. A legacy service role key can be supplied as `SUPABASE_SERVICE_ROLE_KEY` instead.
+
+Keep either key out of `NEXT_PUBLIC_` variables and browser code. `.env.local` is ignored by Git.
 
 ### Database Setup
 
-Run [`supabase/schema.sql`](supabase/schema.sql) in your Supabase project's SQL Editor. The app uses Supabase's HTTPS Data API, so the direct PostgreSQL connection password is not used by the app.
+Run [`supabase/schema.sql`](supabase/schema.sql) in your Supabase project's SQL Editor.
+
+The app uses Supabase's HTTPS Data API, so the direct PostgreSQL connection password is not used by the app.
 
 ### Development
 
@@ -160,7 +169,7 @@ Open `http://localhost:3000`. The interface runs locally, while generated short 
 
 ---
 
-## <img src="https://api.iconify.design/lucide:terminal.svg?color=%23ffffff" width="20" height="20" valign="middle"> Scripts
+## Scripts
 
 | Command | Purpose |
 | ------- | ------- |
@@ -171,7 +180,7 @@ Open `http://localhost:3000`. The interface runs locally, while generated short 
 
 ---
 
-## <img src="https://api.iconify.design/lucide:lock-keyhole.svg?color=%23ffffff" width="20" height="20" valign="middle"> Security
+## Security
 
 Supabase access uses a server-side secret key. The schema enables row-level security and does not grant direct table access to anonymous or authenticated Supabase clients.
 
@@ -179,14 +188,16 @@ The app's own `/api/links` routes currently have no user authentication. Anyone 
 
 ---
 
-## <img src="https://api.iconify.design/lucide:cloud-upload.svg?color=%23ffffff" width="20" height="20" valign="middle"> Deployment
+## Deployment
 
-Deploy the Next.js app to a Node.js host, set `SUPABASE_URL` and `SUPABASE_SECRET_KEY` in the host's server environment, and point `kisux3.xyz` to that deployment. The domain used for generated links is defined in [`lib/site.ts`](lib/site.ts).
+Deploy the Next.js app to a Node.js host, set `SUPABASE_URL` and `SUPABASE_SECRET_KEY` in the host's server environment, and point `kisux3.xyz` to that deployment.
+
+The domain used for generated links is defined in [`lib/site.ts`](lib/site.ts).
 
 Public short links need the `[slug]` route to be reachable at `https://kisux3.xyz/<slug>`. Review the access control note above before making the management interface public.
 
 ---
 
-## <img src="https://api.iconify.design/lucide:scale.svg?color=%23ffffff" width="20" height="20" valign="middle"> License
+## License
 
 No license file is included in this repository.
